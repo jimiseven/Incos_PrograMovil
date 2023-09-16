@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Preguntas</title>
+</head>
+<body>
+    <h1>Juego de Preguntas de Sí o No</h1>
+    <form id="preguntasForm">
+        <p>1. ¿Colón descubrió América?</p>
+        <label>
+            <input type="radio" name="respuesta1" value="true"> Sí
+        </label>
+        <label>
+            <input type="radio" name="respuesta1" value="false"> No
+        </label>
+
+        <p>2. ¿La independencia de Mexixo fue en año 1810?</p>
+        <label>
+            <input type="radio" name="respuesta2" value="true"> Sí
+        </label>
+        <label>
+            <input type="radio" name="respuesta2" value="false"> No
+        </label>
+
+        <p>3. ¿The Doors fue un grupo de Rock alternativos?</p>
+        <label>
+            <input type="radio" name="respuesta3" value="true"> Sí
+        </label>
+        <label>
+            <input type="radio" name="respuesta3" value="false"> No
+        </label>
+
+        <button type="submit">Comprobar Respuestas</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function jugarJuegoDePreguntas(respuestas) {
+            const respuesta1 = respuestas.respuesta1 === 'true';
+            const respuesta2 = respuestas.respuesta2 === 'true';
+            const respuesta3 = respuestas.respuesta3 === 'true';
+
+            if (respuesta1 && respuesta2 && respuesta3) {
+                return '¡Ganaste!';
+            } else {
+                return 'Perdiste';
+            }
+        }
+
+        const preguntasForm = document.getElementById('preguntasForm');
+        const resultadoDiv = document.getElementById('resultado');
+
+        preguntasForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(preguntasForm);
+            const respuestas = {};
+
+            formData.forEach((value, key) => {
+                respuestas[key] = value;
+            });
+
+            const resultado = jugarJuegoDePreguntas(respuestas);
+            resultadoDiv.textContent = `Resultado: ${resultado}`;
+        });
+    </script>
+</body>
+</html>
